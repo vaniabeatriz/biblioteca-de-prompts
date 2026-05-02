@@ -24,10 +24,11 @@ Use the Render service URL, or your custom domain, for `NEXT_PUBLIC_APP_URL`.
 
 The Blueprint uses:
 
-- build command: `npm ci && npm run build`
-- pre-deploy command: `npm run render:predeploy`
+- build command: `npm ci && npm run build && npm run render:predeploy`
 - start command: `npm start`
 - health check path: `/api/health`
 
-The pre-deploy step runs Prisma migrations through `DATABASE_URL` and then runs
-the idempotent seed script for the curated use cases and prompts.
+The final build step runs Prisma migrations through `DATABASE_URL` and then
+runs the idempotent seed script for the curated use cases and prompts. This is
+kept inside the build command because Render pre-deploy commands are not
+available on Free web services.
