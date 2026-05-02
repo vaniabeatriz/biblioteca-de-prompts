@@ -1,0 +1,339 @@
+openapi: 3.1.0
+info:
+  title: Prompt Library Website API
+  version: 0.1.0
+  description: Internal HTTP contract for lead capture, registration, and prompt-library data.
+servers:
+  - url: /
+paths:
+  /api/lead-captures:
+    post:
+      summary: Capture an email from the landing page
+      operationId: createLeadCapture
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LeadCaptureRequest"
+      responses:
+        "201":
+          description: New email captured
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LeadCaptureResponse"
+        "200":
+          description: Existing email found with continuation path
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LeadCaptureResponse"
+        "400":
+          description: Invalid email payload
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /api/registrations:
+    post:
+      summary: Complete or update basic registration
+      operationId: createRegistration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegistrationRequest"
+      responses:
+        "201":
+          description: Registration completed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RegistrationResponse"
+        "200":
+          description: Existing registration updated or continued
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RegistrationResponse"
+        "400":
+          description: Invalid required registration fields
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "422":
+          description: GDPR data-processing confirmation missing
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /api/use-cases:
+    get:
+      summary: List supported use cases
+      operationId: listUseCases
+      responses:
+        "200":
+          description: Supported use-case directory
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - useCases
+                properties:
+                  useCases:
+                    type: array
+                    minItems: 18
+                    maxItems: 18
+                    items:
+                      $ref: "#/components/schemas/UseCaseSummary"
+  /api/use-cases/{slug}:
+    get:
+      summary: Get one use case with prompt collections
+      operationId: getUseCase
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/UseCaseSlug"
+      responses:
+        "200":
+          description: Use case and prompt collections
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UseCaseDetail"
+        "404":
+          description: Unsupported use-case slug
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+components:
+  schemas:
+    UseCaseSlug:
+      type: string
+      enum:
+        - high-school-students
+        - university-students
+        - entry-level-developers
+        - data-analysts
+        - small-medium-business
+        - social-media
+        - marketing
+        - designer
+        - web-designer
+        - product
+        - personal-assistant
+        - agencies
+        - doctors
+        - nutritionists
+        - psychologists
+        - dentists
+        - hair-salon
+        - nail-salon
+    LeadCaptureRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - email
+      properties:
+        email:
+          type: string
+          format: email
+        source:
+          type: string
+          default: landing_page
+    LeadCaptureResponse:
+      type: object
+      additionalProperties: false
+      required:
+        - email
+        - status
+        - nextPath
+      properties:
+        email:
+          type: string
+          format: email
+        status:
+          type: string
+          enum:
+            - email_captured
+            - duplicate_detected
+            - registration_completed
+        nextPath:
+          type: string
+          examples:
+            - /register?email=user%40example.com
+            - /use-cases
+    RegistrationRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - email
+        - fullName
+        - roleOrOccupation
+        - gdprDataProcessingConfirmed
+        - consentTextVersion
+      properties:
+        email:
+          type: string
+          format: email
+        fullName:
+          type: string
+          minLength: 1
+        roleOrOccupation:
+          type: string
+          minLength: 1
+        organizationName:
+          type: string
+        primaryUseCaseSlug:
+          $ref: "#/components/schemas/UseCaseSlug"
+        intendedDestination:
+          type: string
+          pattern: "^/use-cases/[a-z0-9-]+$"
+        gdprDataProcessingConfirmed:
+          type: boolean
+          const: true
+        marketingConsent:
+          type: boolean
+          default: false
+        consentTextVersion:
+          type: string
+          minLength: 1
+    RegistrationResponse:
+      type: object
+      additionalProperties: false
+      required:
+        - email
+        - status
+        - nextPath
+      properties:
+        email:
+          type: string
+          format: email
+        status:
+          type: string
+          enum:
+            - completed
+            - updated
+            - existing
+        nextPath:
+          type: string
+          examples:
+            - /use-cases/data-analysts
+            - /use-cases
+    UseCaseSummary:
+      type: object
+      additionalProperties: false
+      required:
+        - slug
+        - displayName
+        - description
+        - routePath
+        - responsibleUseRequired
+      properties:
+        slug:
+          $ref: "#/components/schemas/UseCaseSlug"
+        displayName:
+          type: string
+        description:
+          type: string
+        routePath:
+          type: string
+        responsibleUseRequired:
+          type: boolean
+    UseCaseDetail:
+      type: object
+      additionalProperties: false
+      required:
+        - slug
+        - displayName
+        - description
+        - routePath
+        - responsibleUseRequired
+        - promptCollections
+      properties:
+        slug:
+          $ref: "#/components/schemas/UseCaseSlug"
+        displayName:
+          type: string
+        description:
+          type: string
+        routePath:
+          type: string
+        responsibleUseRequired:
+          type: boolean
+        promptCollections:
+          type: array
+          items:
+            $ref: "#/components/schemas/PromptCollection"
+        responsibleUseMessage:
+          type: string
+    PromptCollection:
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - title
+        - description
+        - prompts
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        prompts:
+          type: array
+          items:
+            $ref: "#/components/schemas/Prompt"
+    Prompt:
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - title
+        - intendedOutcome
+        - promptText
+        - suggestedInputs
+        - usageNote
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        intendedOutcome:
+          type: string
+        promptText:
+          type: string
+        suggestedInputs:
+          type: string
+        usageNote:
+          type: string
+        responsibleUseNote:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+    ErrorResponse:
+      type: object
+      additionalProperties: false
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        fieldErrors:
+          type: object
+          additionalProperties:
+            type: string

@@ -1,0 +1,29 @@
+import { FlatCompat } from "@eslint/eslintrc";
+import { dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const compat = new FlatCompat({
+  baseDirectory: __dirname
+});
+
+const eslintConfig = [
+  {
+    ignores: [
+      "node_modules/",
+      ".next/",
+      "dist/",
+      "build/",
+      "coverage/",
+      "playwright-report/",
+      "test-results/",
+      "next-env.d.ts",
+      "prisma/*.db",
+      "prisma/*.db-journal"
+    ]
+  },
+  ...compat.extends("next/core-web-vitals", "next/typescript")
+];
+
+export default eslintConfig;

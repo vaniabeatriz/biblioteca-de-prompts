@@ -1,50 +1,120 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report
+Version change: template -> 1.0.0
+Modified principles:
+- Placeholder Principle 1 -> I. Testable User Journeys
+- Placeholder Principle 2 -> II. Privacy and Consent
+- Placeholder Principle 3 -> III. Accessible Web Experience
+- Placeholder Principle 4 -> IV. Simplicity First
+- Placeholder Principle 5 -> V. Traceable Delivery
+Added sections:
+- Additional Constraints
+- Development Workflow
+Removed sections:
+- None
+Templates requiring updates:
+- .specify/templates/spec-template.md: reviewed, no update required
+- .specify/templates/plan-template.md: reviewed, no update required
+- .specify/templates/tasks-template.md: updated for constitution-driven tests
+Runtime guidance:
+- AGENTS.md: reviewed, no update required
+Follow-up items:
+- None
+-->
+# Biblioteca Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Testable User Journeys
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+Every user-facing feature MUST define independently testable user journeys before
+implementation. Critical flows MUST include automated checks at the appropriate
+level, such as contract, integration, or end-to-end tests. Acceptance criteria
+MUST be specific enough for an implementer to validate without guessing intent.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+Rationale: The project should be built in increments that can be demonstrated,
+verified, and changed without breaking unrelated flows.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### II. Privacy and Consent
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+Any feature collecting personal data MUST state the purpose of collection and
+separate required processing confirmation from optional marketing consent.
+Required consent MUST be explicit, not preselected, and recorded with enough
+context to prove what the user accepted. Features MUST avoid collecting personal
+data that is not needed for the stated user or business value.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+Rationale: Lead capture and registration are useful only if they respect user
+trust and support privacy obligations from the start.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### III. Accessible Web Experience
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+Public web pages MUST support keyboard navigation, readable validation errors,
+semantic page structure, and responsive layouts. Interactive controls MUST make
+their state and required actions clear without relying on color alone.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+Rationale: The prompt library is intended for broad public use, so access and
+clarity are product requirements rather than polish.
+
+### IV. Simplicity First
+
+Features SHOULD use the simplest architecture that satisfies the specification,
+quality gates, and expected near-term scale. Additional services, frameworks,
+or abstractions MUST be justified by a concrete requirement, integration need,
+or measurable reduction in implementation complexity.
+
+Rationale: Keeping the first version focused reduces delivery risk and makes
+future iteration easier.
+
+### V. Traceable Delivery
+
+Implementation tasks MUST map back to user stories, functional requirements, or
+cross-cutting quality gates. Plans and task lists MUST use concrete file paths,
+state dependencies clearly, and identify which work can run in parallel. Drift
+between the specification, plan, and tasks MUST be resolved before implementation.
+
+Rationale: Traceability keeps the team aligned on what is being built and why.
+
+## Additional Constraints
+
+- Requirements that affect privacy, consent, accessibility, or regulated
+  professional use MUST be explicit in the specification or task list.
+- Performance targets that are stated as measurable goals MUST have a
+  corresponding validation task or an explicit reason they are manual checks.
+- Public content for professional categories MUST make clear that prompts support
+  workflow, drafting, communication, or education and do not replace professional
+  judgment.
+
+## Development Workflow
+
+- Specifications define what users need and why, without implementation details.
+- Plans define technical choices, project structure, quality gates, and tradeoffs.
+- Tasks define executable work by user story, with dependencies and file paths.
+- Analysis is read-only and should be run before implementation when artifacts
+  change materially.
+- Implementation should proceed incrementally, validating each independently
+  testable user journey before adding the next one.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution supersedes conflicting project guidance. Amendments require a
+documented rationale, a semantic version bump, and review of dependent templates
+or active feature artifacts for consistency.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+Versioning policy:
+
+- MAJOR version increments apply to removed principles or governance changes
+  that invalidate prior compliant work.
+- MINOR version increments apply to new principles, new mandatory sections, or
+  materially expanded quality gates.
+- PATCH version increments apply to clarifications, wording fixes, or
+  non-semantic refinements.
+
+Compliance review expectations:
+
+- Every plan MUST include a constitution check before design and after design.
+- Every task list MUST preserve traceability to user stories or cross-cutting
+  quality gates.
+- Any known violation MUST be documented with a remediation plan before
+  implementation proceeds.
+
+**Version**: 1.0.0 | **Ratified**: 2026-05-02 | **Last Amended**: 2026-05-02

@@ -1,0 +1,92 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model LeadCapture {
+  id         String   @id @default(cuid())
+  email      String   @unique
+  source     String   @default("landing_page")
+  status     String   @default("email_captured")
+  capturedAt DateTime @default(now())
+  lastSeenAt DateTime @updatedAt
+
+  @@index([status])
+}
+
+model Registration {
+  id                   String   @id @default(cuid())
+  email                String   @unique
+  fullName             String
+  roleOrOccupation     String
+  organizationName     String?
+  primaryUseCaseSlug   String?
+  intendedDestination  String?
+  status               String   @default("completed")
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  @@index([primaryUseCaseSlug])
+}
+
+model ConsentRecord {
+  id                 String    @id @default(cuid())
+  email              String
+  purpose            String
+  accepted           Boolean
+  consentTextVersion String
+  acceptedAt         DateTime?
+  context            String
+
+  @@index([email])
+  @@index([purpose])
+}
+
+model UseCase {
+  slug                   String             @id
+  displayName            String
+  description            String
+  routePath              String             @unique
+  sortOrder              Int
+  responsibleUseRequired Boolean            @default(false)
+  status                 String             @default("active")
+  promptCollections      PromptCollection[]
+  prompts                Prompt[]
+}
+
+model PromptCollection {
+  id          String   @id
+  useCaseSlug String
+  title       String
+  description String
+  sortOrder   Int
+  status      String   @default("active")
+  useCase     UseCase  @relation(fields: [useCaseSlug], references: [slug], onDelete: Cascade)
+  prompts     Prompt[]
+
+  @@index([useCaseSlug])
+}
+
+model Prompt {
+  id                 String           @id
+  useCaseSlug        String
+  collectionId       String
+  title              String
+  intendedOutcome    String
+  promptText         String
+  suggestedInputs    String
+  usageNote          String
+  responsibleUseNote String?
+  tags               String
+  status             String           @default("active")
+  sortOrder          Int
+  useCase            UseCase          @relation(fields: [useCaseSlug], references: [slug], onDelete: Cascade)
+  collection         PromptCollection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+
+  @@index([useCaseSlug])
+  @@index([collectionId])
+}
