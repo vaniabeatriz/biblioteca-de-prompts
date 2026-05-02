@@ -3,16 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "build": "prisma generate && next build",
+    "start": "next start -p ${PORT:-3000}",
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "db:setup": "DATABASE_URL=\"file:./dev.db\" prisma generate && DATABASE_URL=\"file:./dev.db\" prisma db push",
-    "seed": "DATABASE_URL=\"file:./dev.db\" tsx prisma/seed.ts"
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:deploy": "prisma migrate deploy",
+    "db:setup": "prisma generate && prisma migrate deploy",
+    "seed": "tsx prisma/seed.ts",
+    "render:predeploy": "npm run db:deploy && npm run seed"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",

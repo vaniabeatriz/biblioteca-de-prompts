@@ -19,14 +19,15 @@
 - Vite with a separate server: viable, but would require choosing and wiring an additional routing and API layer.
 - Plain server-rendered templates: simpler for forms, but less ergonomic for rich prompt browsing and component reuse.
 
-## Decision: Use SQLite with Prisma for the initial persisted data store
+## Decision: Use PostgreSQL with Prisma for the deployed persisted data store
 
-**Rationale**: The first release needs durable records for registrations and consent, but the expected initial scale is modest. SQLite keeps local development and testing simple, while Prisma provides typed data access, schema migrations, and a clear path to a managed relational database later.
+**Rationale**: The first release needs durable records for registrations and consent, and production deployment targets Supabase. PostgreSQL keeps production data on managed infrastructure while Prisma provides typed data access and schema migrations.
 
 **Alternatives considered**:
 
 - Browser local storage: rejected because it does not satisfy actual lead capture or consent record persistence.
 - File-backed JSON: rejected because uniqueness, duplicate handling, and consent audit records are easier and safer with relational constraints.
+- SQLite: used during initial local planning, then replaced for deployment because Supabase provides managed PostgreSQL.
 - External CRM or email marketing platform: deferred because the current feature does not require external campaign automation.
 
 ## Decision: Validate all form and route inputs with shared schemas

@@ -7,17 +7,18 @@
 
 ## Setup
 
-Install dependencies, create the local SQLite schema, and seed the starter
-use-case prompt data:
+Install dependencies, configure a PostgreSQL database URL, apply migrations, and
+seed the starter use-case prompt data:
 
 ```bash
 npm install
+cp .env.example .env
+# Edit DATABASE_URL for your local Supabase or PostgreSQL database.
 npm run db:setup
 npm run seed
 ```
 
-The default scripts use `file:./dev.db`. Override `DATABASE_URL` before running
-the scripts if you want a different SQLite database file.
+For production deployment details, see [Deployment](../../docs/deployment.md).
 
 ## Run Locally
 

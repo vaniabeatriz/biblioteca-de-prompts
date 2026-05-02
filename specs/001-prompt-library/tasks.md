@@ -17,13 +17,13 @@
 
 **Purpose**: Initialize the full-stack TypeScript web application, app shell, and test tooling.
 
-- [X] T001 Create the Next.js project package manifest with Next.js, React, Zod, Prisma, SQLite tooling, Vitest, Playwright, and scripts for `dev`, `build`, `start`, `lint`, `test`, `test:e2e`, `db:setup`, and `seed` in `package.json`
+- [X] T001 Create the Next.js project package manifest with Next.js, React, Zod, Prisma, PostgreSQL tooling, Vitest, Playwright, and scripts for `dev`, `build`, `start`, `lint`, `test`, `test:e2e`, `db:setup`, and `seed` in `package.json`
 - [X] T002 [P] Configure Next.js application settings in `next.config.ts`
 - [X] T003 [P] Configure TypeScript compiler options and path aliases in `tsconfig.json`
 - [X] T004 [P] Configure Vitest for unit, integration, and contract tests in `vitest.config.ts`
 - [X] T005 [P] Create shared Vitest setup file in `tests/setup.ts`
 - [X] T006 [P] Configure Playwright end-to-end testing in `playwright.config.ts`
-- [X] T007 [P] Create the environment variable template for SQLite and app URLs in `.env.example`
+- [X] T007 [P] Create the environment variable template for Supabase/PostgreSQL and app URLs in `.env.example`
 - [X] T008 [P] Create the root application layout shell in `src/app/layout.tsx`
 - [X] T009 [P] Create global responsive styles for the public website in `src/app/globals.css`
 - [X] T010 Create source and test directory placeholders in `src/app/.gitkeep`, `src/components/.gitkeep`, `src/lib/.gitkeep`, `src/data/.gitkeep`, `src/types/.gitkeep`, `tests/contract/.gitkeep`, `tests/integration/.gitkeep`, `tests/e2e/.gitkeep`, and `tests/unit/.gitkeep`

@@ -12,7 +12,7 @@ coverage/
 playwright-report/
 test-results/
 
-# Prisma / SQLite local files
+# Local database files
 prisma/*.db
 prisma/*.db-journal
 *.db

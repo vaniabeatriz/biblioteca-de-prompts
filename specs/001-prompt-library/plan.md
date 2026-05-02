@@ -12,10 +12,10 @@ Build a responsive prompt-library website with a landing page email capture, a b
 ## Technical Context
 
 **Language/Version**: TypeScript 5.x on Node.js 25.8.0 local development runtime  
-**Primary Dependencies**: Next.js App Router, React, Zod for form/data validation, Prisma for data access, SQLite for local persistence, Vitest, Playwright  
-**Storage**: SQLite database for registrations, consent records, use-case metadata, and curated prompt content  
+**Primary Dependencies**: Next.js App Router, React, Zod for form/data validation, Prisma for data access, PostgreSQL/Supabase for persistence, Vitest, Playwright  
+**Storage**: PostgreSQL database for registrations, consent records, use-case metadata, and curated prompt content; production deployment uses Supabase  
 **Testing**: Vitest for unit/integration tests; Playwright for end-to-end registration and routing flows  
-**Target Platform**: Responsive web application served by a Node-compatible host  
+**Target Platform**: Responsive web application served by a Node-compatible host; production deployment uses Render Node web service  
 **Project Type**: Full-stack web application  
 **Performance Goals**: Landing email capture and registration transitions complete in under 1 second after submission on normal broadband; use-case pages render within 2 seconds for the initial 18 categories; users can reach a relevant prompt in under 90 seconds  
 **Constraints**: GDPR data-processing confirmation must be explicit and not preselected; marketing consent must be separate if present; professional categories require responsible-use messaging; all 18 use-case paths must remain stable and testable; full prompt access requires completed basic registration while direct use-case visits may show registration-oriented previews  
