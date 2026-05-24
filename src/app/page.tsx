@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { EmailCaptureForm } from "@/components/email-capture-form";
 
 const previewUseCases = [
@@ -10,29 +11,127 @@ const previewUseCases = [
   "Salons"
 ];
 
+const promptBenefits = [
+  "create clearer outputs",
+  "save time on repetitive work",
+  "improve communication",
+  "unlock better ideas",
+  "reduce blank-page syndrome",
+  "challenge your assumptions",
+  "turn messy thoughts into structured action"
+];
+
+const promptingSkills = [
+  "ask better questions",
+  "give useful context",
+  "communicate intent clearly",
+  "collaborate with AI effectively"
+];
+
 export default function HomePage() {
   return (
-    <section className="page hero">
-      <div>
-        <h1>Prompt Library</h1>
-        <p className="lead">
-          Find practical prompts organized by the way you work. Choose a use case,
-          register once, and go straight to the prompt path that fits your goal.
-        </p>
-        <ul className="tag-list" aria-label="Example use cases">
-          {previewUseCases.map((label) => (
-            <li key={label}>{label}</li>
+    <>
+      <section className="page hero">
+        <div className="hero-copy">
+          <p className="eyebrow">Practical AI prompts for real work</p>
+          <h1>Prompt Library</h1>
+          <p className="lead">
+            A curated collection of practical prompts designed to help you
+            think clearer, work smarter, and get better results with AI.
+          </p>
+          <p>
+            AI is powerful, but the quality of what you get back depends on
+            what you ask. The right prompt can turn AI from a simple chatbot
+            into a creative partner, editor, strategist, researcher, or coach.
+          </p>
+          <p>This library exists to make that easier.</p>
+          <ul className="tag-list" aria-label="Example use cases">
+            {previewUseCases.map((label) => (
+              <li key={label}>{label}</li>
+            ))}
+          </ul>
+        </div>
+        <aside className="panel" aria-label="Register interest">
+          <h2>Start with your email</h2>
+          <p>
+            Get guided into the library, save your preferred use case, and start
+            with prompts you can adapt immediately.
+          </p>
+          <EmailCaptureForm />
+          <Link className="card-link" href="/use-cases">
+            Browse the prompt library first
+          </Link>
+        </aside>
+      </section>
+
+      <section className="page home-section">
+        <div className="section-heading">
+          <p className="eyebrow">What is inside</p>
+          <h2>Prompts for real-life work and everyday use.</h2>
+          <p className="lead">
+            Inside, you will find prompts for writing emails, organising ideas,
+            solving problems, preparing for meetings, brainstorming, learning,
+            and making decisions.
+          </p>
+        </div>
+        <div className="panel home-copy-block">
+          <p>
+            Each prompt is meant to be practical, reusable, and easy to adapt to
+            your own context. Use the prompts as they are, remix them, and make
+            them yours.
+          </p>
+        </div>
+      </section>
+
+      <section className="page home-section">
+        <div className="section-heading">
+          <p className="eyebrow">Why prompts matter</p>
+          <h2>Prompting is more than typing a question into AI.</h2>
+          <p className="lead">It is a way of thinking.</p>
+        </div>
+        <div className="grid benefit-grid" aria-label="Prompt benefits">
+          {promptBenefits.map((benefit) => (
+            <article className="card benefit-card" key={benefit}>
+              <p>{benefit}</p>
+            </article>
           ))}
-        </ul>
-      </div>
-      <aside className="panel" aria-label="Register interest">
-        <h2>Start with your email</h2>
-        <p>
-          Enter your email to continue to the short registration form and unlock
-          the prompt library.
+        </div>
+        <p className="lead home-truth">
+          The better the input, the more useful the outcome.
         </p>
-        <EmailCaptureForm />
-      </aside>
-    </section>
+      </section>
+
+      <section className="page home-section">
+        <div className="panel conversion-panel">
+          <div>
+            <p className="eyebrow">A useful skill</p>
+            <h2>Learning how to prompt well means learning how to think with AI.</h2>
+            <p>
+              It is becoming an increasingly valuable skill across work,
+              learning, and everyday life.
+            </p>
+          </div>
+          <ul className="skill-list" aria-label="Prompting skills">
+            {promptingSkills.map((skill) => (
+              <li key={skill}>{skill}</li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="page home-section closing-section">
+        <div className="section-heading">
+          <p className="eyebrow">Start the conversation</p>
+          <h2>The goal is not to find the perfect prompt.</h2>
+          <p className="lead">
+            It is to help you start the conversation with more clarity, context,
+            and momentum.
+          </p>
+        </div>
+        <Link className="button" href="/use-cases">
+          Explore use cases
+        </Link>
+      </section>
+    </>
   );
 }

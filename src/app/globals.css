@@ -147,6 +147,11 @@ textarea:focus-visible {
   margin: 0;
 }
 
+.hero-copy {
+  display: grid;
+  gap: 1rem;
+}
+
 .lead {
   color: var(--muted);
   font-size: 1.1rem;
@@ -276,6 +281,72 @@ textarea:focus-visible {
   text-decoration: none;
 }
 
+.home-section {
+  padding-top: 0;
+}
+
+.home-section h2 {
+  font-size: clamp(1.7rem, 4vw, 3rem);
+  letter-spacing: 0;
+  line-height: 1.05;
+  margin: 0;
+  max-width: 18ch;
+}
+
+.home-copy-block {
+  max-width: 760px;
+}
+
+.home-copy-block p {
+  color: var(--muted);
+  font-size: 1.08rem;
+  margin: 0;
+}
+
+.benefit-grid {
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+}
+
+.benefit-card p {
+  color: var(--text);
+  font-weight: 700;
+  margin: 0;
+}
+
+.home-truth {
+  margin-top: 1.5rem;
+}
+
+.conversion-panel {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: minmax(0, 1.1fr) minmax(240px, 0.9fr);
+}
+
+.conversion-panel h2 {
+  max-width: 22ch;
+}
+
+.skill-list {
+  display: grid;
+  gap: 0.7rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.skill-list li {
+  background: rgb(20 107 95 / 10%);
+  border-radius: 8px;
+  color: var(--accent-strong);
+  font-weight: 700;
+  padding: 0.75rem 0.9rem;
+}
+
+.closing-section {
+  padding-bottom: clamp(3rem, 7vw, 5rem);
+}
+
 .section {
   margin-top: 2rem;
 }
@@ -331,5 +402,9 @@ textarea:focus-visible {
   .site-header {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .conversion-panel {
+    grid-template-columns: 1fr;
   }
 }

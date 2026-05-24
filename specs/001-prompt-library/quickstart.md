@@ -37,7 +37,7 @@ Open the local development URL shown by the command.
 5. Submit the registration form without GDPR confirmation and confirm submission is blocked.
 6. Complete the form with GDPR confirmation and a primary use case.
 7. Confirm successful registration routes to the selected `/use-cases/{slug}` page.
-8. Open a direct use-case path before registration and confirm the page preserves the intended destination through registration.
+8. Open a direct use-case path before registration and confirm prompt collections and prompt items are visible without registration.
 9. Open `/use-cases` and verify all 18 supported use cases are present.
 10. Open `/use-cases/doctors`, `/use-cases/nutritionists`, `/use-cases/psychologists`, and `/use-cases/dentists` and verify responsible-use messaging is visible.
 11. Open an unsupported path such as `/use-cases/unknown` and verify the app offers a clear path back to `/use-cases`.
@@ -63,7 +63,7 @@ Implementation should satisfy:
 
 - Landing email capture and registration flow pass automated and manual checks.
 - Registration cannot complete without explicit GDPR data-processing confirmation.
-- Direct use-case visits before registration preserve the intended destination after registration.
+- Direct use-case visits before registration show prompt collections and prompt items without requiring registration.
 - Duplicate email handling gives the user a continuation path without duplicate active registrations.
 - All 18 use-case paths render the matching prompt-library page.
 - Regulated professional use-case pages include responsible-use messaging.

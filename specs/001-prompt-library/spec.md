@@ -40,7 +40,7 @@ A visitor who has submitted an email completes a short registration form with ba
 
 ### User Story 3 - Choose a Use Case and Enter Its Prompt Library Path (Priority: P2)
 
-A registered or registering user selects one of the supported use cases and is directed to the corresponding prompt-library path for that audience or business type.
+A visitor selects one of the supported use cases and is directed to the corresponding prompt-library path for that audience or business type without needing to register first.
 
 **Why this priority**: The core product value is organizing prompts around user intent and taking each user to the right use-case destination.
 
@@ -51,7 +51,7 @@ A registered or registering user selects one of the supported use cases and is d
 1. **Given** the user has completed registration and selected a primary use case, **When** registration succeeds, **Then** the user is taken to the selected use-case path.
 2. **Given** the user has not selected a primary use case, **When** registration succeeds, **Then** the user is taken to a use-case directory where all supported use cases are available.
 3. **Given** a user selects "Data Analysts" from the directory, **When** they confirm the selection, **Then** they arrive at the Data Analysts prompt library path.
-4. **Given** an unregistered visitor opens a direct use-case path, **When** they choose to register from that page, **Then** the website preserves that intended destination and returns them there after successful registration.
+4. **Given** an unregistered visitor opens a direct use-case path, **When** the page loads, **Then** the visitor can see the prompt collections and prompt items without completing registration.
 
 ---
 
@@ -75,7 +75,7 @@ A user on a use-case page browses prompts grouped by practical tasks, reviews pr
 - GDPR confirmation not selected: registration must not complete.
 - Invalid, misspelled, or unsupported use-case path: the user should be redirected to the use-case directory with a clear explanation.
 - User submits an email but leaves before registration: the system should preserve enough progress to let them resume from the registration step when practical.
-- Direct use-case visit before registration: the page should show enough context to orient the visitor, prompt registration, preserve the intended destination, and return the user there after registration.
+- Direct use-case visit before registration: the page should show the complete prompt library for that use case without requiring registration.
 - Regulated professional categories such as doctors, nutritionists, psychologists, and dentists: prompts must avoid implying diagnosis, treatment, or replacement of licensed professional judgment.
 - Empty or not-yet-populated prompt collection for a use case: the page should still explain the category and offer a clear next action rather than appearing broken.
 
@@ -114,14 +114,14 @@ A user on a use-case page browses prompts grouped by practical tasks, reviews pr
   - `/use-cases/nail-salon`
 - **FR-012**: If the user selects a primary use case during registration, successful registration MUST take the user directly to that use case's prompt-library path.
 - **FR-013**: If the user does not select a primary use case, successful registration MUST take the user to the use-case directory.
-- **FR-014**: After registration or an equivalent completed access flow, each use-case page MUST present prompts grouped by task, goal, or workflow so users can quickly identify relevant prompts.
+- **FR-014**: Each use-case page MUST present prompts grouped by task, goal, or workflow so users can quickly identify relevant prompts without registration.
 - **FR-015**: Each prompt item MUST include a title, intended outcome, prompt text, suggested inputs or context to provide, and a brief usage note.
 - **FR-016**: The website MUST provide clear navigation between the landing page, registration form, use-case directory, and individual use-case pages.
 - **FR-017**: The website MUST handle duplicate email registrations with a non-blocking path to continue, update details, or access the relevant use-case directory.
 - **FR-018**: The website MUST show a clear fallback for unsupported use-case paths and provide a path back to the use-case directory.
 - **FR-019**: Prompt pages for doctors, nutritionists, psychologists, and dentists MUST include responsible-use messaging that prompts are for productivity, education, drafting, or administrative support and are not a substitute for professional judgment.
 - **FR-020**: The website MUST preserve the spelling-corrected public labels "Nutritionists" and "Psychologists" while still satisfying the user's requested use cases.
-- **FR-021**: The website MUST preserve an intended use-case destination when an unregistered visitor lands directly on a use-case path and return them there after successful registration.
+- **FR-021**: The website MUST allow unregistered visitors to view prompt collections and prompt items on direct use-case paths.
 
 ### Key Entities *(include if feature involves data)*
 
@@ -151,7 +151,7 @@ A user on a use-case page browses prompts grouped by practical tasks, reviews pr
 - The website's primary business goal for this feature is lead capture followed by guided prompt discovery.
 - "Register" means a short lead or access form, not a paid checkout flow or full account-security feature.
 - The initial prompt library is curated content organized by use case; live prompt generation is outside this feature's scope.
-- Full prompt access requires completed basic registration. Direct visits to `/use-cases/{slug}` before registration may show a category preview, but must prompt the user to register and preserve the intended use-case path as the post-registration destination.
+- Full prompt access does not require completed basic registration. Direct visits to `/use-cases/{slug}` show the prompt library immediately.
 - Public labels correct the misspellings "nutrionists" and "psycologist" to "Nutritionists" and "Psychologists".
-- GDPR confirmation covers data processing for registration and access. Optional marketing communication, if offered, requires separate consent.
+- GDPR confirmation covers data processing for registration. Optional marketing communication, if offered, requires separate consent.
 - Professional-use prompts are positioned as drafting, workflow, education, or communication aids and do not replace licensed professional advice or compliance obligations.

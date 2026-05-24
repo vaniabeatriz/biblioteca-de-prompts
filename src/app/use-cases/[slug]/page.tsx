@@ -1,11 +1,5 @@
-import { cookies } from "next/headers";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PromptCollection } from "@/components/prompt-collection";
-import {
-  hasPromptLibraryAccess,
-  registerPathForUseCase
-} from "@/lib/access";
 import { getUseCaseDetail } from "@/lib/prompts";
 
 export default async function UseCaseDetailPage({
@@ -19,10 +13,6 @@ export default async function UseCaseDetailPage({
   if (!detail) {
     notFound();
   }
-
-  const cookieStore = await cookies();
-  const hasAccess = hasPromptLibraryAccess(cookieStore);
-  const registerPath = registerPathForUseCase(detail.routePath);
 
   return (
     <section className="page">
@@ -38,27 +28,9 @@ export default async function UseCaseDetailPage({
         </div>
       ) : null}
 
-      {hasAccess ? (
-        detail.promptCollections.map((collection) => (
-          <PromptCollection key={collection.id} collection={collection} />
-        ))
-      ) : (
-        <div className="panel section">
-          <h2>Register to unlock prompts</h2>
-          <p>
-            Preview this category now, then complete the short registration form
-            to return directly to this prompt library.
-          </p>
-          <ul className="tag-list" aria-label="Available prompt groups">
-            {detail.promptCollections.map((collection) => (
-              <li key={collection.id}>{collection.title}</li>
-            ))}
-          </ul>
-          <Link className="button" href={registerPath}>
-            Register to unlock prompts
-          </Link>
-        </div>
-      )}
+      {detail.promptCollections.map((collection) => (
+        <PromptCollection key={collection.id} collection={collection} />
+      ))}
     </section>
   );
 }

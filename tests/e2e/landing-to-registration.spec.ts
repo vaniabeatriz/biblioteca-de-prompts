@@ -5,6 +5,10 @@ test("landing page rejects invalid email and routes valid email to registration"
 }) => {
   await page.goto("/");
 
+  await expect(
+    page.getByRole("heading", { name: "Prompt Library" })
+  ).toBeVisible();
+
   await page.getByLabel("Email address").fill("invalid");
   await page.getByRole("button", { name: "Continue" }).click();
   await expect(page.getByText("Enter a valid email address.")).toBeVisible();

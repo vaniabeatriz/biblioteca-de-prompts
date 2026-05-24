@@ -14,19 +14,24 @@ test("use-case directory links to canonical prompt paths", async ({ page }) => {
   await expect(page).toHaveURL(/\/use-cases\/data-analysts$/);
 });
 
-test("direct use-case registration preserves the intended destination", async ({
+test("direct use-case visits show prompts without registration", async ({ page }) => {
+  await page.goto("/use-cases/web-designer");
+
+  await expect(
+    page.getByRole("heading", { name: "Everyday workflow prompts" })
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Web Designer task planner" })
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Register to unlock prompts" })
+  ).toHaveCount(0);
+});
+
+test("manual registration can still preserve an intended destination", async ({
   page
 }) => {
   const email = `nav-${Date.now()}@example.com`;
-
-  await page.goto("/use-cases/web-designer");
-  const registerLink = page.getByRole("link", {
-    name: "Register to unlock prompts"
-  });
-  await expect(registerLink).toHaveAttribute(
-    "href",
-    "/register?next=%2Fuse-cases%2Fweb-designer"
-  );
 
   await page.goto(
     `/register?email=${encodeURIComponent(email)}&next=/use-cases/web-designer`

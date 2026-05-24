@@ -73,7 +73,7 @@
 **Required content and behavior**:
 
 - Supports only canonical slugs listed in `data-model.md`.
-- Allows direct visits before registration to show a category preview and a registration prompt that preserves the current use-case path.
+- Allows direct visits before registration to show the complete prompt collections and prompt items.
 - Shows the use-case display name, description, prompt collections, and prompt items.
 - Groups prompts by task, goal, or workflow.
 - Each prompt item shows title, intended outcome, prompt text, suggested inputs, and usage note.
