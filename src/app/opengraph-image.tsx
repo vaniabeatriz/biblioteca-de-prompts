@@ -14,8 +14,8 @@ export default function Image() {
     (
       <div
         style={{
-          background: "#f7f5ef",
-          color: "#1c2430",
+          background: "#08152f",
+          color: "#ffffff",
           display: "flex",
           flexDirection: "column",
           height: "100%",
@@ -26,7 +26,7 @@ export default function Image() {
       >
         <div
           style={{
-            color: "#0e4e46",
+            color: "#f4d7dc",
             fontSize: 28,
             fontWeight: 800,
             letterSpacing: 2,
@@ -48,7 +48,7 @@ export default function Image() {
           </div>
           <div
             style={{
-              color: "#59616f",
+              color: "#dbe3f4",
               fontSize: 38,
               lineHeight: 1.22,
               maxWidth: 900
@@ -60,7 +60,7 @@ export default function Image() {
         <div
           style={{
             alignItems: "center",
-            color: "#0e4e46",
+            color: "#f4d7dc",
             display: "flex",
             fontSize: 30,
             fontWeight: 800,
@@ -69,7 +69,7 @@ export default function Image() {
         >
           <div
             style={{
-              background: "#146b5f",
+              background: "#8f1f3f",
               borderRadius: 12,
               height: 26,
               width: 26

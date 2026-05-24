@@ -72,7 +72,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <Link className="brand" href="/">Prompt Library</Link>
           <nav aria-label="Primary navigation">
             <Link href="/use-cases">Use cases</Link>
-            <Link href="/register">Register</Link>
+            <Link className="nav-cta" href="/register">Register</Link>
           </nav>
         </header>
         <main id="content" tabIndex={-1}>

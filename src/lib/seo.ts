@@ -30,7 +30,7 @@ export const siteConfig = {
     "A curated collection of practical prompts to help you think clearer, work smarter, and get better results with AI.",
   creator: "Prompt Library",
   locale: "en_US",
-  themeColor: "#146b5f",
+  themeColor: "#08152f",
   keywords: [
     "AI prompts",
     "prompt library",

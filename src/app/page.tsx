@@ -59,6 +59,12 @@ const promptingSkills = [
   "collaborate with AI effectively"
 ];
 
+const heroStats = [
+  { value: "18", label: "use-case paths" },
+  { value: "36", label: "starter prompts" },
+  { value: "0", label: "account gate" }
+];
+
 export default function HomePage() {
   return (
     <>
@@ -102,23 +108,65 @@ export default function HomePage() {
             into a creative partner, editor, strategist, researcher, or coach.
           </p>
           <p>This library exists to make that easier.</p>
+          <div className="hero-actions">
+            <Link className="button" href="/use-cases">
+              Explore prompts
+            </Link>
+            <Link className="button secondary" href="/register">
+              Save your path
+            </Link>
+          </div>
           <ul className="tag-list" aria-label="Example use cases">
             {previewUseCases.map((label) => (
               <li key={label}>{label}</li>
             ))}
           </ul>
         </div>
-        <aside className="panel" aria-label="Register interest">
-          <h2>Start with your email</h2>
-          <p>
-            Get guided into the library, save your preferred use case, and start
-            with prompts you can adapt immediately.
-          </p>
-          <EmailCaptureForm />
-          <Link className="card-link" href="/use-cases">
-            Browse the prompt library first
-          </Link>
-        </aside>
+        <div className="hero-stack">
+          <aside className="panel signup-panel" aria-label="Register interest">
+            <p className="eyebrow">Start faster</p>
+            <h2>Get guided into the library</h2>
+            <p>
+              Save your preferred use case and start with prompts you can adapt
+              immediately.
+            </p>
+            <EmailCaptureForm />
+            <Link className="card-link" href="/use-cases">
+              Browse the prompt library first
+            </Link>
+          </aside>
+          <div className="product-preview" aria-label="Prompt library preview">
+            <div className="preview-topbar">
+              <span />
+              <span />
+              <span />
+            </div>
+            <div className="preview-message user-message">
+              I need to turn a rough idea into a clear plan.
+            </div>
+            <div className="preview-message ai-message">
+              Try a planning prompt with objective, constraints, next actions,
+              and risks.
+            </div>
+            <div className="preview-checklist">
+              <p>Prompt output</p>
+              <ul>
+                <li>Clarify the goal</li>
+                <li>Structure the work</li>
+                <li>Decide the next step</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="page proof-strip" aria-label="Library overview">
+        {heroStats.map((stat) => (
+          <div className="proof-item" key={stat.label}>
+            <strong>{stat.value}</strong>
+            <span>{stat.label}</span>
+          </div>
+        ))}
       </section>
 
       <section className="page home-section">
