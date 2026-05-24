@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import { RegistrationForm } from "@/components/registration-form";
 import { USE_CASES } from "@/data/use-cases";
+import { noIndexMetadata } from "@/lib/seo";
 import { isSupportedUseCasePath } from "@/lib/routing";
+
+export const metadata: Metadata = noIndexMetadata(
+  "Register",
+  "Register for the Prompt Library and save your preferred AI prompt use case."
+);
 
 type RegisterSearchParams = Promise<
   Record<string, string | string[] | undefined>

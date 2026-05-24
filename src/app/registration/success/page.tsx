@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import { noIndexMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = noIndexMetadata(
+  "Registration complete",
+  "Registration confirmation for the Prompt Library."
+);
 
 export default function RegistrationSuccessPage() {
   return (

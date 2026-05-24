@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import { noIndexMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = noIndexMetadata(
+  "Use case not found",
+  "This prompt-library use-case path is not supported."
+);
 
 export default function NotFound() {
   return (

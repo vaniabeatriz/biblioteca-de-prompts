@@ -1,12 +1,64 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import type { ReactNode } from "react";
+import {
+  absoluteUrl,
+  openGraphImage,
+  siteConfig,
+  siteUrl
+} from "@/lib/seo";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Prompt Library",
-  description: "A curated library of prompts organized by practical use case.",
-  applicationName: "Prompt Library"
+  metadataBase: siteUrl,
+  title: {
+    default: siteConfig.defaultTitle,
+    template: siteConfig.titleTemplate
+  },
+  description: siteConfig.description,
+  applicationName: siteConfig.name,
+  authors: [{ name: siteConfig.creator }],
+  creator: siteConfig.creator,
+  publisher: siteConfig.name,
+  category: "productivity",
+  classification: "AI prompt library",
+  keywords: [...siteConfig.keywords],
+  referrer: "origin-when-cross-origin",
+  alternates: {
+    canonical: absoluteUrl("/")
+  },
+  openGraph: {
+    type: "website",
+    locale: siteConfig.locale,
+    siteName: siteConfig.name,
+    title: siteConfig.defaultTitle,
+    description: siteConfig.description,
+    url: absoluteUrl("/"),
+    images: [openGraphImage()]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.defaultTitle,
+    description: siteConfig.description,
+    images: ["/opengraph-image"]
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1
+    }
+  },
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+    apple: "/icon.svg"
+  },
+  manifest: "/manifest.webmanifest"
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

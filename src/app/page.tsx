@@ -1,5 +1,36 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { EmailCaptureForm } from "@/components/email-capture-form";
+import { JsonLd } from "@/components/json-ld";
+import {
+  absoluteUrl,
+  canonicalUrl,
+  openGraphImage,
+  organizationJsonLd,
+  siteConfig,
+  useCaseItemListJsonLd,
+  websiteJsonLd
+} from "@/lib/seo";
+
+export const metadata: Metadata = {
+  title: "AI Prompt Library for Work, Study and Everyday Use",
+  description: siteConfig.shortDescription,
+  alternates: {
+    canonical: canonicalUrl("/")
+  },
+  openGraph: {
+    title: "AI Prompt Library for Work, Study and Everyday Use",
+    description: siteConfig.shortDescription,
+    url: absoluteUrl("/"),
+    images: [openGraphImage()]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AI Prompt Library for Work, Study and Everyday Use",
+    description: siteConfig.shortDescription,
+    images: ["/opengraph-image"]
+  }
+};
 
 const previewUseCases = [
   "Students",
@@ -31,6 +62,32 @@ const promptingSkills = [
 export default function HomePage() {
   return (
     <>
+      <JsonLd
+        data={[
+          websiteJsonLd(),
+          organizationJsonLd(),
+          {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            name: "Prompt Library",
+            url: canonicalUrl("/"),
+            description: siteConfig.shortDescription,
+            isPartOf: {
+              "@type": "WebSite",
+              name: siteConfig.name,
+              url: canonicalUrl("/")
+            },
+            about: [
+              "AI prompts",
+              "prompt engineering",
+              "AI productivity",
+              "writing prompts",
+              "business prompts"
+            ]
+          },
+          useCaseItemListJsonLd()
+        ]}
+      />
       <section className="page hero">
         <div className="hero-copy">
           <p className="eyebrow">Practical AI prompts for real work</p>
