@@ -72,8 +72,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <header className="site-header">
           <Link className="brand" href="/">Prompt Library</Link>
           <nav aria-label="Primary navigation">
-            <Link href="/use-cases">Use cases</Link>
-            <Link className="nav-cta" href="/register">Register</Link>
+            <Link href="/use-cases">Library</Link>
+            <Link className="nav-cta" href="/register">Join updates</Link>
           </nav>
         </header>
         <main id="content" tabIndex={-1}>
