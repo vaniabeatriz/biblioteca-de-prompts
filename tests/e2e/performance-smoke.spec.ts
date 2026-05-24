@@ -9,7 +9,7 @@ test("core prompt-library pages meet smoke timing goals", async ({ page }) => {
   const email = `perf-${Date.now()}@example.com`;
   const captureStart = Date.now();
   await page.getByLabel("Email address").fill(email);
-  await page.getByRole("button", { name: "Continue" }).click();
+  await page.getByRole("button", { name: "Get updates" }).click();
   await expect(page).toHaveURL(new RegExp(`/register\\?email=${email.replace("@", "%40")}`));
   expect(Date.now() - captureStart).toBeLessThan(10_000);
 

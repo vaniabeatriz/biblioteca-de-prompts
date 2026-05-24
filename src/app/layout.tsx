@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { CookieBanner } from "@/components/cookie-banner";
 import {
   absoluteUrl,
   openGraphImage,
@@ -82,6 +83,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <Link href="/use-cases">Browse use cases</Link>
           <Link href="/register">Register</Link>
         </footer>
+        <CookieBanner />
       </body>
     </html>
   );

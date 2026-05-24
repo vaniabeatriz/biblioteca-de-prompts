@@ -3,7 +3,19 @@
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 
-export function EmailCaptureForm() {
+interface EmailCaptureFormProps {
+  buttonLabel?: string;
+  inputLabel?: string;
+  placeholder?: string;
+  source?: string;
+}
+
+export function EmailCaptureForm({
+  buttonLabel = "Continue",
+  inputLabel = "Email address",
+  placeholder,
+  source = "landing_page"
+}: EmailCaptureFormProps) {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
@@ -20,7 +32,7 @@ export function EmailCaptureForm() {
       const response = await fetch("/api/lead-captures", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email })
+        body: JSON.stringify({ email, source })
       });
       const payload = await response.json();
 
@@ -44,7 +56,7 @@ export function EmailCaptureForm() {
   return (
     <form className="form-stack" onSubmit={onSubmit} noValidate>
       <div className="field">
-        <label htmlFor="landing-email">Email address</label>
+        <label htmlFor="landing-email">{inputLabel}</label>
         <input
           id="landing-email"
           name="email"
@@ -52,13 +64,14 @@ export function EmailCaptureForm() {
           value={email}
           onChange={(event) => setEmail(event.target.value)}
           autoComplete="email"
+          placeholder={placeholder}
           required
         />
         {error ? <p className="error">{error}</p> : null}
       </div>
       {notice ? <p className="notice">{notice}</p> : null}
       <button type="submit" disabled={isSubmitting}>
-        {isSubmitting ? "Saving..." : "Continue"}
+        {isSubmitting ? "Saving..." : buttonLabel}
       </button>
     </form>
   );
